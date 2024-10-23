@@ -97,6 +97,7 @@ def chat_interface(message):
         # # 当前步骤结束，进行下一步骤
         # elif '【正确】' in response1:
         #     response1 = response1.replace('【正确】', '')
+            current_step += 1
             messages = []
             response = chat_interface("")
             response.insert(0, response1)
