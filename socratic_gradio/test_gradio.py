@@ -84,19 +84,19 @@ def chat_interface(message):
         # 添加步骤结束后的完整代码检查
         if '【结束】' in response1:
             response1 = response1.replace('【结束】', '')
-            messages = [
-                {'role': 'system', 'content': prompts.subtasks_end_system},
-                {'role': 'user', 'content': prompts.subtasks_end + steps[current_step]}
-            ]
-            response2 = agent_calling(messages)
-            messages.append({'role': 'assistant', 'content': response2})
-            chat_history.append(f"【老师】：{response2}")
-            current_step += 1
-            return [response1, response2]
+        #     messages = [
+        #         {'role': 'system', 'content': prompts.subtasks_end_system},
+        #         {'role': 'user', 'content': prompts.subtasks_end + steps[current_step]}
+        #     ]
+        #     response2 = agent_calling(messages)
+        #     messages.append({'role': 'assistant', 'content': response2})
+        #     chat_history.append(f"【老师】：{response2}")
+        #     current_step += 1
+        #     return [response1, response2]
 
-        # 当前步骤结束，进行下一步骤
-        elif '【正确】' in response1:
-            response1 = response1.replace('【正确】', '')
+        # # 当前步骤结束，进行下一步骤
+        # elif '【正确】' in response1:
+        #     response1 = response1.replace('【正确】', '')
             messages = []
             response = chat_interface("")
             response.insert(0, response1)
