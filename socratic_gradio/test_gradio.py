@@ -141,6 +141,8 @@ with gr.Blocks() as iface:
         global current_step, messages
         current_step = 0
         messages = []
+        chat_history = []
+        save_history(chat_history)
         bot_message = chat_interface("")
         history = [[None, bot_message[0]], [None, bot_message[1]]]
         return gr.update(value=history)
