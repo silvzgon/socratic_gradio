@@ -72,7 +72,10 @@ def chat_interface(message):
     if message.lower() == '\\skip':
         current_step += 1
         if current_step < len(steps): return ["好的，我们跳过这个步骤。"]
-        else: return ["好的，我们跳过这个步骤。", "所有步骤已完成。是否要重新开始？"]
+        else:
+            current_step = 0
+            messages = []
+            return ["好的，我们跳过这个步骤。", "所有步骤已完成。是否要重新开始？"]
     
     else:
         messages.append({'role': 'user', 'content': message})
@@ -139,17 +142,17 @@ with gr.Blocks() as iface:
         return history, gr.update(value='history/history.json')
     
     def reset():
-        global current_step, messages
+        global current_step, messages, chat_history
         current_step = 0
         messages = []
         chat_history = []
-        save_history(chat_history)
         bot_message = chat_interface("")
         history = [[None, bot_message[0]], [None, bot_message[1]]]
-        return gr.update(value=history)
+        save_history(chat_history)
+        return history, gr.update(value='history/history.json')
 
     msg.submit(user, [msg, chatbot], [msg, chatbot], queue=False).then(bot, chatbot, [chatbot, download])
-    clear.click(reset, None, chatbot, queue=False)
+    clear.click(reset, None, [chatbot, download], queue=False)
 
 # 运行Gradio应用
 if __name__ == "__main__":
