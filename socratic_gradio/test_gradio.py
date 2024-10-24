@@ -86,7 +86,6 @@ def chat_interface(message, current_step, messages, chat_history):
         messages.append({'role': 'assistant', 'content': response})
         chat_history.append(f"【老师】：{response}")
         if flag:
-            print(response)
             response = response.replace('【结束】', '')
             yield [response], current_step, messages, chat_history
             current_step += 1
